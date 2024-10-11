@@ -1,15 +1,25 @@
 package com.fastcampuspay.common;
 
-import org.springframework.core.annotation.AliasFor;
-import org.springframework.stereotype.Component;
+import jakarta.validation.*;
+import jakarta.validation.Validator;
+import java.util.Set;
 
-import java.lang.annotation.*;
+public abstract class SelfValidating<T> {
+    private Validator validator;
 
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Component
-public @interface SelfValidating {
-    @AliasFor(annotation = Component.class)
-    String value() default "";
+    public SelfValidating() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = (Validator) factory.getValidator();
+    }
+
+    /**
+     * Evaluates all Bean Validations on the attributes of this
+     * instance.
+     */
+    protected void validateSelf() {
+        Set<ConstraintViolation<T>> violations = validator.validate((T) this);
+        if(!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
+    }
 }
