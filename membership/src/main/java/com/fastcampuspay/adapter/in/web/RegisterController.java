@@ -24,7 +24,7 @@ public class RegisterController {
                 .email(dto.getEmail())
                 .address(dto.getAddress())
                 .isValid(true)
-                .isCorp(dto.isCorp())
+                .aggregateIdentifier(dto.getAggregateIdentifier())
                 .build();
         registerMembershipUseCase.registerMembership(command);
     }

@@ -11,9 +11,15 @@ public class MembershipPersistenceAdapter implements RegisterMembershipPort {
     private final SpringDataMembershipRepository membershipRepository;
 
     @Override
-    public void createMembership(Membership.MembershipName membershipName, Membership.MembershipEmail membershipEmail, Membership.MembershipAddress membershipAddress, Membership.MembershipIsValid membershipIsValid, Membership.MembershipAggregateIdentifier membershipIsCorp) {
-        membershipRepository.save(
-                new MembershipJpaEntity(membershipName.getMembershipName(), membershipEmail.getMembershipEmail(), membershipAddress.getMembershipAddress(), membershipIsValid.isMembershipIsValid(), membershipIsCorp.getAggregateIdentifier())
+    public MembershipJpaEntity createMembership(Membership.MembershipName membershipName, Membership.MembershipEmail membershipEmail, Membership.MembershipAddress membershipAddress, Membership.MembershipIsValid membershipIsValid, Membership.MembershipAggregateIdentifier membershipIsCorp) {
+        return membershipRepository.save(
+                new MembershipJpaEntity(
+                        membershipName.getMembershipName(),
+                        membershipEmail.getMembershipEmail(),
+                        membershipAddress.getMembershipAddress(),
+                        membershipIsValid.isMembershipIsValid(),
+                        membershipIsCorp.getAggregateIdentifier()
+                )
         );
     }
 }

@@ -29,17 +29,17 @@ public class RegisterMembershipCommand extends SelfValidating<RegisterMembership
     @AssertTrue
     private final boolean isValid;
 
-    private final boolean isCorp;
+    private final String aggregateIdentifier;
 
 
 
 
-    public RegisterMembershipCommand(String name, String email, String address, boolean isValid, boolean isCorp) {
+    public RegisterMembershipCommand(String name, String email, String address, boolean isValid, String aggregateIdentifier) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.isValid = isValid;
-        this.isCorp = isCorp;
+        this.aggregateIdentifier = aggregateIdentifier;
 
         // * value에 대한 exception
         this.validateSelf();

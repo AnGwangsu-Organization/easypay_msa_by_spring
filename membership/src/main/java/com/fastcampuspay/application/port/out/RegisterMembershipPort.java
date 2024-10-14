@@ -1,9 +1,10 @@
 package com.fastcampuspay.application.port.out;
 
+import com.fastcampuspay.adapter.out.persistence.MembershipJpaEntity;
 import com.fastcampuspay.domain.Membership;
 
 public interface RegisterMembershipPort {
-    void createMembership(
+    MembershipJpaEntity createMembership(
             Membership.MembershipName membershipName,
             Membership.MembershipEmail membershipEmail,
             Membership.MembershipAddress membershipAddress,
